@@ -496,7 +496,7 @@ const HeroSection = ({ theme = "light" }) => {
             animate="visible"
           >
             <img
-              src="http://192.168.1.3:3000/your-photo.jpg"
+              src="/your-photo.jpg"
               alt="Raj, Full Stack Developer"
               onError={(e) => (e.target.src = "https://via.placeholder.com/400?text=Profile+Image")}
             />
