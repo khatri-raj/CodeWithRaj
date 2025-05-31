@@ -25,7 +25,7 @@ const contactData = [
     id: 3,
     name: "LinkedIn",
     icon: <FaLinkedin size={24} style={{ marginRight: "10px" }} />,
-    link: "https://www.linkedin.com/in/your-profile", // Replace with your LinkedIn
+    link: "https://www.linkedin.com/in/rajkhatri2002/", // Replace with your LinkedIn
     text: "Connect with me on LinkedIn",
     color: "#0077B5",
   },
@@ -33,7 +33,7 @@ const contactData = [
     id: 4,
     name: "GitHub",
     icon: <FaGithub size={24} style={{ marginRight: "10px" }} />,
-    link: "https://github.com/your-profile", // Replace with your GitHub
+    link: "https://github.com/khatri-raj", // Replace with your GitHub
     text: "Check out my projects on GitHub",
     color: "#181717",
   },
