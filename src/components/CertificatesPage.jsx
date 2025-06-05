@@ -9,6 +9,15 @@ const CertificatesPage = ({ theme = "light" }) => {
   useEffect(() => {
     const manualCertificates = [
       {
+        id: 0,
+        name: "Certificate for Presentation: Machine Learning Course Recommendation Study",
+        issuer: "CMCS College, Nashik (MVP Samaj)",
+        description:
+          "Presented a research paper titled 'A Comparative Study of Machine Learning Algorithms for Personalized Course Recommendations' at ETCSA-2025 organized by CMCS College, Nashik.",
+        photo: "/certificates/ETCSA.png", 
+        link: "https://drive.google.com/file/d/1r53YgZLPbYQqI5WXK0zReft6ZR_AE1jB/view?usp=sharing", 
+      },
+      {
         id: 1,
         name: "Amazon Q-Build: Smarter AI Assistants Workshop",
         issuer: "Amazon Web Services",
