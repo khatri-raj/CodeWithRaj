@@ -6,6 +6,7 @@ import HeroSection from "./components/HeroSection";
 import AboutMe from "./components/AboutMe";
 import ExperienceSection from "./components/ExperienceSection";
 import ProjectsPage from "./components/ProjectsPage";
+import CertificatesPage from "./components/CertificatesPage";
 import ContactPage from "./components/ContactPage";
 
 function App() {
@@ -72,6 +73,10 @@ function App() {
               <Route
                 path="/projects"
                 element={<ProjectsPage theme={theme} />}
+              />
+              <Route
+                path="/certificates"
+                element={<CertificatesPage theme={theme} />}
               />
               <Route
                 path="/contact"
