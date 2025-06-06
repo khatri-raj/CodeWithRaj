@@ -19,6 +19,15 @@ const CertificatesPage = ({ theme = "light" }) => {
       },
       {
         id: 1,
+        name: "Python Internship Certificate",
+        issuer: "SoftCrowd Technologies",
+        description:
+          "Successfully completed 120 hours of job training in Python from 4th March 2024 to 18th April 2024, with a performance grade of A.",
+        photo: "/certificates/Industrial_Training.jpg",
+        link: "https://drive.google.com/file/d/1ixg5jRNlI-W85nxl6Tum4tyZxU3Jb_1m/view?usp=sharing", // Optional: Add Google Drive link or portfolio link if needed
+      },
+      {
+        id: 2,
         name: "Amazon Q-Build: Smarter AI Assistants Workshop",
         issuer: "Amazon Web Services",
         description:
@@ -27,7 +36,7 @@ const CertificatesPage = ({ theme = "light" }) => {
         link: "https://drive.google.com/file/d/1O7qKesLpQuhlAa4h3YmP-2HTyVuzmEKR/view",
       },
       {
-        id: 2,
+        id: 3,
         name: "Workplace Ready: Life and Employability Training",
         issuer: "Reliance Foundation",
         description:
@@ -36,7 +45,7 @@ const CertificatesPage = ({ theme = "light" }) => {
         link: "https://rfskillingacademy.com/user/login?prev_path=/certificate/group/514/165617",
       },
       {
-        id: 3,
+        id: 4,
         name: "Web Development Fundamentals",
         issuer: "IBM SkillsBuild",
         description:
@@ -45,7 +54,7 @@ const CertificatesPage = ({ theme = "light" }) => {
         link: "https://www.credly.com/badges/d98910a6-2e41-4b74-8873-39ff8d9a6197",
       },
       {
-        id: 4,
+        id: 5,
         name: "Fundamental AI Concepts",
         issuer: "Microsoft",
         description:
@@ -54,7 +63,7 @@ const CertificatesPage = ({ theme = "light" }) => {
         link: "https://learn.microsoft.com/en-us/users/rajkhatri-0919/achievements/87lcb8bw?ref=https%3A%2F%2Fwww.linkedin.com%2F",
       },
       {
-        id: 5,
+        id: 6,
         name: "Fundamentals of Azure AI Services",
         issuer: "Microsoft",
         description:
@@ -63,7 +72,7 @@ const CertificatesPage = ({ theme = "light" }) => {
         link: "https://learn.microsoft.com/en-us/users/rajkhatri-0919/achievements/yqu8lbkr?ref=https%3A%2F%2Fwww.linkedin.com%2F",
       },
       {
-        id: 6,
+        id: 7,
         name: "Fundamentals of Generative AI",
         issuer: "Microsoft",
         description:
@@ -77,6 +86,7 @@ const CertificatesPage = ({ theme = "light" }) => {
     setIsLoading(false);
     setError(null);
   }, []);
+  
 
   // Animation variants for certificate cards
   const cardVariants = {
