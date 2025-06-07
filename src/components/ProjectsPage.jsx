@@ -11,6 +11,7 @@ const ProjectsPage = ({ theme = "light" }) => {
           "A full-stack web application built to help students in Pune compare educational courses and institutes based on fees, placement rates, and student ratings. The platform simplifies the decision-making process by offering easy-to-use comparison tools, real...",
         link: "https://github.com/khatri-raj/Course-Comparison",
         tech_stack: "HTML5, CSS3, Bootstrap, JavaScript, Python, Django, MySQL",
+        image: "Projects/Course_Compare.jpeg",
       },
       {
         id: 2,
@@ -19,6 +20,7 @@ const ProjectsPage = ({ theme = "light" }) => {
           "A full-featured healthcare platform built using Django and Bootstrap 5, designed to connect doctors and patients seamlessly. Separate dashboards and profile management for Patients and Doctors, Patients can view doctors, select a specialty, choose a date...",
         link: "https://github.com/khatri-raj/healthcare-app",
         tech_stack: "Python 3, Django 5, HTML5, CSS3, Bootstrap, JavaScript",
+        image: "Projects/HealthCareApp.png",
       },
       {
         id: 3,
@@ -27,6 +29,7 @@ const ProjectsPage = ({ theme = "light" }) => {
           "This is a simple REST API built with the Serverless Framework and Node.js. It allows users to send emails by providing the receiver’s email address, subject, and message body. The project uses Nodemailer with Ethereal email for testing locally and AWS ...",
         link: "https://github.com/khatri-raj/email-api-serverless",
         tech_stack: "JavaScript (Node.js), Serverless Framework, Node.js, AWS",
+        image: "Projects/ServerlessApi.png",
       },
       {
         id: 4,
@@ -35,6 +38,7 @@ const ProjectsPage = ({ theme = "light" }) => {
           "A secure, user-friendly blogging platform built with Django that allows users to create, edit, delete, and manage blog posts. The platform includes robust authentication and authorization features, user profile management, and an admin interface for mana...",
         link: "https://github.com/khatri-raj/Secure_Blog_Portal",
         tech_stack: "Python, Django, HTML5, CSS3, Bootstrap, MySQL",
+        image: "Projects/SecureBlog.png",
       },
       {
         id: 5,
@@ -43,6 +47,7 @@ const ProjectsPage = ({ theme = "light" }) => {
           "A Django-based web application to manage personal finances. It allows users to add, view, filter, edit, and delete income and expense transactions. It also includes secure authentication, profile management, and planned features like CSV export and chart...",
         link: "https://github.com/khatri-raj/expense-tracker",
         tech_stack: "Python, Django, HTML5, CSS3, Bootstrap, MySQL (development uses SQLite)",
+        image: "Projects/PersenalExpenseTracker.png",
       },
       {
         id: 6,
@@ -51,6 +56,7 @@ const ProjectsPage = ({ theme = "light" }) => {
           "A full-stack real estate web platform that simplifies the process of property discovery, listing, and user-agent interaction. The portal allows users to search, view, and connect over real estate properties with a responsive design and modern interface...",
         link: "https://github.com/khatri-raj/Real-Estate-Portal",
         tech_stack: "React.js, JavaScript, HTML, CSS, Django (Python), SQLite (configurable to MySQL/PostgreSQL)",
+        image: "Projects/RealEstateportal.png",
       },
       {
         id: 7,
@@ -59,6 +65,7 @@ const ProjectsPage = ({ theme = "light" }) => {
           "A curated set of three classic games built with Python and Pygame, designed to demonstrate fundamental game development concepts. This project showcases your skills in event handling, collision detection, game loops, and real-time interactivity — makin...",
         link: "https://github.com/khatri-raj/Pygame-Classics-Collection",
         tech_stack: "Python, Pygame library",
+        image: "Projects/Pygames.png",
       },
     ],
     []
@@ -136,6 +143,16 @@ const ProjectsPage = ({ theme = "light" }) => {
       scale: 1.05,
       rotate: 2,
       backgroundColor: theme === "light" ? "#005bb5" : "#1e88e5",
+      transition: { duration: 0.3, ease: "easeOut" },
+    },
+  };
+
+  // Animation variants for project image
+  const imageVariants = {
+    initial: { scale: 1, opacity: 1 },
+    hover: {
+      scale: 1.1,
+      opacity: 0.9,
       transition: { duration: 0.3, ease: "easeOut" },
     },
   };
@@ -243,6 +260,22 @@ const ProjectsPage = ({ theme = "light" }) => {
           color: ${theme === "light" ? "#111827" : "#f9fafb"};
         }
 
+        .project-image-container {
+          width: 100%;
+          max-width: 350px;
+          margin: 0 auto 16px;
+          overflow: hidden;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-image {
+          width: 100%;
+          height: auto;
+          display: block;
+          object-fit: cover;
+        }
+
         .project-description {
           font-size: 1rem;
           line-height: 1.6;
@@ -302,6 +335,10 @@ const ProjectsPage = ({ theme = "light" }) => {
 
           .project-card h3 {
             font-size: 1.5rem;
+          }
+
+          .project-image-container {
+            max-width: 100%;
           }
 
           .project-description {
@@ -378,6 +415,20 @@ const ProjectsPage = ({ theme = "light" }) => {
                   aria-label={`Project: ${project.title}`}
                 >
                   <h3>{project.title}</h3>
+                  {project.image && (
+                    <motion.div
+                      className="project-image-container"
+                      variants={imageVariants}
+                      initial="initial"
+                      whileHover="hover"
+                    >
+                      <img
+                        src={project.image}
+                        alt={`${project.title} screenshot`}
+                        className="project-image"
+                      />
+                    </motion.div>
+                  )}
                   <p className="project-description">{project.description}</p>
                   <div className="tech-stack" aria-label="Tech stack used">
                     {project.tech_stack
