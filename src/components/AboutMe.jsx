@@ -46,29 +46,51 @@ const timelineData = [
     year: "2025 - Present",
     title: "Full-Stack Developer",
     description: "Developed web applications using Django and React.",
+    pdfUrl: "/Education/Internship_Certificate.png",
   },
   {
     year: "2023 - 2025",
     title: "Master's Degree in Computer Science",
-    description: "Completed postgraduate studies in Computer Science.",
+    description: "Completed postgraduate studies in Computer Science with a CGPA of 8.07.",
+    pdfUrl: "/Education/Post_Graduation.jpg",
   },
   {
     year: "2020-2023",
     title: "Computer Science Degree",
-    description: "Graduated with a B.S. in Computer Science.",
+    description: "Graduated with a B.S. in Computer Science with a CGPA of 7.90.",
+    pdfUrl: "/Education/Graduationertificate.pdf",
+  },  
+  {
+    year: "2018 - 2020",
+    title: "Higher Secondary Certificate (HSC)",
+    description: "Completed HSC in Science stream with 75.69% marks.",
+    pdfUrl: "/Education/HSCMARKSHEET.pdf",
   },
+  {
+    year: "2017 - 2018",
+    title: "Secondary School Certificate (SSC)",
+    description: "Completed SSC with 83.80% marks.",
+    pdfUrl: "/Education/SSCMARKSHEET.pdf",
+  } 
 ];
 
 const AboutMe = ({ theme = "light" }) => {
   const [expandedSkill, setExpandedSkill] = useState(null);
   const [expandedTimeline, setExpandedTimeline] = useState(null);
+  const [showPdf, setShowPdf] = useState(null);
 
   const toggleSkill = (index) => {
     setExpandedSkill(expandedSkill === index ? null : index);
   };
 
   const toggleTimeline = (index) => {
-    setExpandedTimeline(expandedTimeline === index ? null : index);
+    const newIndex = expandedTimeline === index ? null : index;
+    setExpandedTimeline(newIndex);
+    setShowPdf(null); // Reset PDF view when toggling
+  };
+
+  const togglePdf = (index) => {
+    setShowPdf(showPdf === index ? null : index);
   };
 
   // Animation variants for skills
@@ -112,9 +134,9 @@ const AboutMe = ({ theme = "light" }) => {
     }),
     hover: {
       scale: 1.03,
-      rotate: -2,
-      boxShadow: `0 4px 16px ${theme === "light" ? "rgba(0, 123, 255, 0.2)" : "rgba(33, 161, 241, 0.2)"}`,
-      transition: { duration: 0.3 },
+      y: -5, // Lift effect instead of rotate
+      boxShadow: `0 6px 20px ${theme === "light" ? "rgba(0, 123, 255, 0.3)" : "rgba(33, 161, 241, 0.3)"}`,
+      transition: { duration: 0.3, ease: "easeOut" },
     },
   };
 
@@ -129,6 +151,12 @@ const AboutMe = ({ theme = "light" }) => {
   const dividerVariants = {
     hidden: { scaleX: 0, opacity: 0 },
     visible: { scaleX: 1, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
+  };
+
+  // Animation for PDF embed
+  const pdfVariants = {
+    hidden: { opacity: 0, height: 0 },
+    visible: { opacity: 1, height: "auto", transition: { duration: 0.4 } },
   };
 
   return (
@@ -311,6 +339,33 @@ const AboutMe = ({ theme = "light" }) => {
           line-height: 1.6;
         }
 
+        .view-button {
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          padding: 8px 16px;
+          background: ${theme === "light" ? "#007bff" : "#21a1f1"};
+          color: #ffffff;
+          border: none;
+          border-radius: 6px;
+          cursor: pointer;
+          font-size: 0.9rem;
+          font-weight: 500;
+          transition: background 0.3s ease;
+        }
+
+        .view-button:hover {
+          background: ${theme === "light" ? "#0056b3" : "#1a8cd8"};
+        }
+
+        .pdf-embed {
+          width: 100%;
+          height: 500px;
+          margin-top: 16px;
+          border: 1px solid ${theme === "light" ? "#e5e7eb" : "#6b7280"};
+          border-radius: 8px;
+        }
+
         @media (max-width: 768px) {
           .about-section {
             padding: 60px 15px;
@@ -357,6 +412,17 @@ const AboutMe = ({ theme = "light" }) => {
           .timeline-item::after {
             left: 11px;
             top: 28px;
+          }
+
+          .view-button {
+            top: 12px;
+            right: 12px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+          }
+
+          .pdf-embed {
+            height: 300px;
           }
         }
       `}</style>
@@ -492,14 +558,42 @@ const AboutMe = ({ theme = "light" }) => {
                 </h4>
                 <AnimatePresence>
                   {expandedTimeline === index && (
-                    <motion.p
+                    <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.4 }}
                     >
-                      {item.description}
-                    </motion.p>
+                      <p>{item.description}</p>
+                      {item.pdfUrl && (
+                        <button
+                          className="view-button"
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent timeline toggle
+                            togglePdf(index);
+                          }}
+                          aria-label={`View certificate for ${item.title}`}
+                        >
+                          {showPdf === index ? "Hide" : "View"} Certificate
+                        </button>
+                      )}
+                      {showPdf === index && item.pdfUrl && (
+                        <motion.div
+                          className="pdf-embed"
+                          variants={pdfVariants}
+                          initial="hidden"
+                          animate="visible"
+                          exit="hidden"
+                        >
+                          <embed
+                            src={item.pdfUrl}
+                            type="application/pdf"
+                            width="100%"
+                            height="100%"
+                          />
+                        </motion.div>
+                      )}
+                    </motion.div>
                   )}
                 </AnimatePresence>
               </motion.div>
