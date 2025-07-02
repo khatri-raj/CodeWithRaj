@@ -46,38 +46,38 @@ const timelineData = [
     year: "2025 - Present",
     title: "Full-Stack Developer",
     description: "Developed web applications using Django and React.",
-    pdfUrl: "/Education/Internship_Certificate.png",
+    photo: "/Education/Internship_Certificate.png",
   },
   {
     year: "2023 - 2025",
     title: "Master's Degree in Computer Science",
     description: "Completed postgraduate studies in Computer Science with a CGPA of 8.07.",
-    pdfUrl: "/Education/Post_Graduation.jpg",
+    photo: "/Education/Post_Graduation.jpg",
   },
   {
     year: "2020-2023",
     title: "Computer Science Degree",
     description: "Graduated with a B.S. in Computer Science with a CGPA of 7.90.",
-    pdfUrl: "/Education/Graduationertificate.pdf",
-  },  
+    photo: "/Education/Graduationertificate.png",
+  },
   {
     year: "2018 - 2020",
     title: "Higher Secondary Certificate (HSC)",
     description: "Completed HSC in Science stream with 75.69% marks.",
-    pdfUrl: "/Education/HSCMARKSHEET.pdf",
+    photo: "/Education/HSCMARKSHEET.png",
   },
   {
     year: "2017 - 2018",
     title: "Secondary School Certificate (SSC)",
     description: "Completed SSC with 83.80% marks.",
-    pdfUrl: "/Education/SSCMARKSHEET.pdf",
-  } 
+    photo: "/Education/SSCMARKSHEET.png",
+  },
 ];
 
 const AboutMe = ({ theme = "light" }) => {
   const [expandedSkill, setExpandedSkill] = useState(null);
   const [expandedTimeline, setExpandedTimeline] = useState(null);
-  const [showPdf, setShowPdf] = useState(null);
+  const [showCertificate, setShowCertificate] = useState(null);
 
   const toggleSkill = (index) => {
     setExpandedSkill(expandedSkill === index ? null : index);
@@ -86,14 +86,13 @@ const AboutMe = ({ theme = "light" }) => {
   const toggleTimeline = (index) => {
     const newIndex = expandedTimeline === index ? null : index;
     setExpandedTimeline(newIndex);
-    setShowPdf(null); // Reset PDF view when toggling
+    setShowCertificate(null);
   };
 
-  const togglePdf = (index) => {
-    setShowPdf(showPdf === index ? null : index);
+  const toggleCertificate = (index) => {
+    setShowCertificate(showCertificate === index ? null : index);
   };
 
-  // Animation variants for skills
   const skillVariants = {
     hidden: { opacity: 0, scale: 0.8, y: 20 },
     visible: (index) => ({
@@ -110,7 +109,6 @@ const AboutMe = ({ theme = "light" }) => {
     },
   };
 
-  // Animation variants for proficiency bar
   const proficiencyVariants = {
     initial: { width: 0 },
     animate: (proficiency) => ({
@@ -124,7 +122,6 @@ const AboutMe = ({ theme = "light" }) => {
     },
   };
 
-  // Animation variants for timeline items
   const timelineVariants = {
     hidden: { opacity: 0, x: -50 },
     visible: (index) => ({
@@ -134,29 +131,37 @@ const AboutMe = ({ theme = "light" }) => {
     }),
     hover: {
       scale: 1.03,
-      y: -5, // Lift effect instead of rotate
+      y: -5,
       boxShadow: `0 6px 20px ${theme === "light" ? "rgba(0, 123, 255, 0.3)" : "rgba(33, 161, 241, 0.3)"}`,
       transition: { duration: 0.3, ease: "easeOut" },
     },
   };
 
-  // Animation variants for timeline marker
   const markerVariants = {
     hidden: { scale: 0, opacity: 0 },
     visible: { scale: 1, opacity: 1, transition: { duration: 0.4, ease: "easeOut" } },
     hover: { scale: 1.3, transition: { duration: 0.2 } },
   };
 
-  // Animation variants for section divider
   const dividerVariants = {
     hidden: { scaleX: 0, opacity: 0 },
     visible: { scaleX: 1, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
   };
 
-  // Animation for PDF embed
-  const pdfVariants = {
-    hidden: { opacity: 0, height: 0 },
-    visible: { opacity: 1, height: "auto", transition: { duration: 0.4 } },
+  const certificateVariants = {
+    hidden: { opacity: 0, height: 0, scale: 0.8 },
+    visible: { opacity: 1, height: "auto", scale: 1, transition: { duration: 0.4, ease: "easeOut" } },
+    hover: { scale: 1.05, transition: { duration: 0.3 } },
+  };
+
+  const buttonVariants = {
+    hover: {
+      scale: 1.1,
+      background: `linear-gradient(90deg, ${theme === "light" ? "#007bff, #00c4ff" : "#21a1f1, #6be3ff"})`,
+      boxShadow: `0 4px 12px ${theme === "light" ? "rgba(0, 123, 255, 0.4)" : "rgba(33, 161, 241, 0.4)"}`,
+      transition: { duration: 0.3, ease: "easeOut" },
+    },
+    tap: { scale: 0.95, transition: { duration: 0.2 } },
   };
 
   return (
@@ -199,6 +204,10 @@ const AboutMe = ({ theme = "light" }) => {
 
         .about-section h2 {
           font-size: 2.5rem;
+          background: linear-gradient(45deg, ${theme === "light" ? "#007bff, #00c4ff" : "#21a1f1, #6be3ff"});
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         .about-section h3 {
@@ -292,6 +301,7 @@ const AboutMe = ({ theme = "light" }) => {
           margin-bottom: 16px;
           position: relative;
           border-radius: 8px;
+          background: ${theme === "light" ? "#fff" : "#4b5563"};
           transition: all 0.3s ease;
         }
 
@@ -322,7 +332,7 @@ const AboutMe = ({ theme = "light" }) => {
         }
 
         .timeline-item:hover {
-          background: ${theme === "light" ? "#f1f5f9" : "#4b5563"};
+          background: ${theme === "light" ? "#f1f5f9" : "#6b7280"};
         }
 
         .timeline-item h4 {
@@ -358,12 +368,20 @@ const AboutMe = ({ theme = "light" }) => {
           background: ${theme === "light" ? "#0056b3" : "#1a8cd8"};
         }
 
-        .pdf-embed {
+        .certificate-image-container {
+          position: relative;
           width: 100%;
-          height: 500px;
+          overflow: hidden;
           margin-top: 16px;
-          border: 1px solid ${theme === "light" ? "#e5e7eb" : "#6b7280"};
+        }
+
+        .certificate-photo {
+          width: 100%;
+          height: auto;
+          object-fit: contain;
           border-radius: 8px;
+          max-height: 400px;
+          border: 1px solid ${theme === "light" ? "#e5e7eb" : "#6b7280"};
         }
 
         @media (max-width: 768px) {
@@ -421,8 +439,8 @@ const AboutMe = ({ theme = "light" }) => {
             font-size: 0.85rem;
           }
 
-          .pdf-embed {
-            height: 300px;
+          .certificate-photo {
+            max-height: 300px;
           }
         }
       `}</style>
@@ -565,31 +583,34 @@ const AboutMe = ({ theme = "light" }) => {
                       transition={{ duration: 0.4 }}
                     >
                       <p>{item.description}</p>
-                      {item.pdfUrl && (
-                        <button
+                      {item.photo && (
+                        <motion.button
                           className="view-button"
                           onClick={(e) => {
-                            e.stopPropagation(); // Prevent timeline toggle
-                            togglePdf(index);
+                            e.stopPropagation();
+                            toggleCertificate(index);
                           }}
+                          variants={buttonVariants}
+                          whileHover="hover"
+                          whileTap="tap"
                           aria-label={`View certificate for ${item.title}`}
                         >
-                          {showPdf === index ? "Hide" : "View"} Certificate
-                        </button>
+                          {showCertificate === index ? "Hide" : "View"} Certificate
+                        </motion.button>
                       )}
-                      {showPdf === index && item.pdfUrl && (
+                      {showCertificate === index && item.photo && (
                         <motion.div
-                          className="pdf-embed"
-                          variants={pdfVariants}
+                          className="certificate-image-container"
+                          variants={certificateVariants}
                           initial="hidden"
                           animate="visible"
                           exit="hidden"
+                          whileHover="hover"
                         >
-                          <embed
-                            src={item.pdfUrl}
-                            type="application/pdf"
-                            width="100%"
-                            height="100%"
+                          <img
+                            src={item.photo}
+                            alt={`${item.title} certificate`}
+                            className="certificate-photo"
                           />
                         </motion.div>
                       )}
